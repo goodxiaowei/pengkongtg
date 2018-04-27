@@ -41,15 +41,15 @@ public class TradeInfoServiceImpl implements TradeInfoService {
 		String id = UUID.randomUUID().toString();
 		requestParam.put("id", id);
 		requestParam.put("status", Constants.TASK_DRAFT);
-			//新增一条记录至数据库中
-			Integer result = tradeInfoDao.insert(requestParam);
-			//启动流程引擎
-			bpmService.startProcess(String.valueOf(UserUtil.getUser().getId()));
-			if(result > 0){
-				return CommonUtil.successJson();
-			}else{
-				return CommonUtil.failJson();
-			}
+		//新增一条记录至数据库中
+		Integer result = tradeInfoDao.insert(requestParam);
+		//启动流程引擎
+		bpmService.startProcess(String.valueOf(UserUtil.getUser().getId()));
+		if(result > 0){
+			return CommonUtil.successJson();
+		}else{
+			return CommonUtil.failJson();
+		}
 	}
 
 	@Override

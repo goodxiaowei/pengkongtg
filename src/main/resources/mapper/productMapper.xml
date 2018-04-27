@@ -37,7 +37,7 @@
 			and product_id = #{productId}
 		</if>
 		<if test="productName != null and productName != ''">
-			and product_name = #{productName},
+			and product_name = #{productName}
 		</if>
 		<if test="createTime != null and createTime != ''">
 			and create_time = #{createTime}
@@ -53,14 +53,14 @@
 		</if>
 	</select>
 	
-	<insert id="insert" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+	<insert id="insert" parameterType="com.alibaba.fastjson.JSONObject">
 		insert into product
 		values(
 			#{productName},#{createTime},#{updateTime},#{creater},#{updater},#{deleteStatus}
 		)
 	</insert>
 	
-	<update id="update" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+	<update id="update" parameterType="com.alibaba.fastjson.JSONObject">
 		update product 
 		<set>
 			<if test="productName != null and productName != ''">
@@ -85,7 +85,7 @@
 			where product_id = #{productId}
 	</update>
 	
-	<update id="delete" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+	<update id="delete" parameterType="com.alibaba.fastjson.JSONObject">
 		update product 
 		<set>
 			<if test="productName != null and productName != ''">
@@ -107,3 +107,4 @@
 		</set>
 			where product_id = #{productId}
 	</update>
+</mapper>

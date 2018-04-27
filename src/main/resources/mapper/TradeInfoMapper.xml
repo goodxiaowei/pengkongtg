@@ -70,14 +70,14 @@
 		</if>
 	</select>
 
-	<insert id="insert" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
-		insert into trade_info
+	<insert id="insert" parameterType="com.alibaba.fastjson.JSONObject">
+		insert into trade_info(trade_price, trade_type, trade_msg, task_id, status, delete_status)
 		values(
-			#{id},#{tradePrice},#{tradeType},#{tradeMsg},#{taskId},#{status},#{deleteStatus}
+			#{tradePrice},#{tradeType},#{tradeMsg},#{taskId},#{status},#{deleteStatus}
 		)
 	</insert>
 	
-	<update id="update" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+	<update id="update" parameterType="com.alibaba.fastjson.JSONObject">
 		update trade_info 
 		<set>
 			<if test="id != null and id != ''">
