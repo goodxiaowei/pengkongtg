@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pengkongtec.dao.ProductDao">
+	
+	<select id="getList" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.util.List">
+		select product_id productId,
+		product_name productName,
+		create_time createTime,
+		update_time updateTime,
+		creater creater,
+		updater updater from product where 
+		delete_status = '1'
+		<if test="product_id != null and product_id != ''">
+			and product_id = #{productId}
+		</if>
+		<if test="productName != null and productName != ''">
+			and product_name = #{productName},
+		</if>
+		<if test="createTime != null and createTime != ''">
+			and create_time = #{createTime}
+		</if>
+		<if test="updateTime != null and updateTime != ''">
+			and update_time = #{updateTime}
+		</if>
+		<if test="creater != null and creater != ''">
+			and creater = #{creater}
+		</if>
+		<if test="updater != null and updater != ''">
+			and updater = #{updater}
+		</if>
+	</select>
+	
+	<select id="getCount" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+		select count(1) from product where 
+		delete_status = '1'
+		<if test="product_id != null and product_id != ''">
+			and product_id = #{productId}
+		</if>
+		<if test="productName != null and productName != ''">
+			and product_name = #{productName},
+		</if>
+		<if test="createTime != null and createTime != ''">
+			and create_time = #{createTime}
+		</if>
+		<if test="updateTime != null and updateTime != ''">
+			and update_time = #{updateTime}
+		</if>
+		<if test="creater != null and creater != ''">
+			and creater = #{creater}
+		</if>
+		<if test="updater != null and updater != ''">
+			and updater = #{updater}
+		</if>
+	</select>
+	
+	<insert id="insert" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+		insert into product
+		values(
+			#{productName},#{createTime},#{updateTime},#{creater},#{updater},#{deleteStatus}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+		update product 
+		<set>
+			<if test="productName != null and productName != ''">
+				product_name = #{productName},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+			<if test="creater != null and creater != ''">
+				creater = #{creater},
+			</if>
+			<if test="updater != null and updater != ''">
+				updater = #{updater}
+			</if>
+			<if test="delete_status != null and delete_status != ''">
+				delete_status = #{deleteStatus}
+			</if>
+		</set>
+			where product_id = #{productId}
+	</update>
+	
+	<update id="delete" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+		update product 
+		<set>
+			<if test="productName != null and productName != ''">
+				product_name = #{productName},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+			<if test="creater != null and creater != ''">
+				creater = #{creater},
+			</if>
+			<if test="updater != null and updater != ''">
+				updater = #{updater},
+			</if>
+			delete_status = '2'
+		</set>
+			where product_id = #{productId}
+	</update>
