@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pengkongtec.dao.LoggerEntityDao">
+	
+	<select id="getList" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.util.List">
+		select id, ip, uri, type, declaring_class declaringClass,
+		method, return_type returnType, param_data paramData,
+		request_time requestTime, response_time responseTime,
+		exception_type exceptionType, exception_msg exceptionMsg from logger 
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="ip != null and ip != ''">
+			and ip = #{ip},
+		</if>
+		<if test="uri != null and uri != ''">
+			and uri = #{uri}
+		</if>
+		<if test="type != null and type != ''">
+			and type = #{type}
+		</if>
+		<if test="declaringClass != null and declaringClass != ''">
+			and declaring_class = #{declaringClass}
+		</if>
+		<if test="method != null and method != ''">
+			and method = #{method}
+		</if>
+		<if test="returnType != null and returnType != ''">
+			and return_type = #{returnType}
+		</if>
+		<if test="paramData != null and paramData != ''">
+			and param_data = #{paramData}
+		</if>
+		<if test="requestTime != null and requestTime != ''">
+			and request_time = #{requestTime}
+		</if>
+		<if test="responseTime != null and responseTime != ''">
+			and response_time = #{responseTime}
+		</if>
+		<if test="exceptionType != null and exceptionType != ''">
+			and exception_type = #{exceptionType}
+		</if>
+		<if test="exceptionMsg != null and exceptionMsg != ''">
+			and exception_msg = #{exceptionMsg}
+		</if>
+	</select>
+	
+	<select id="getCount" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+		select count(1) from logger 
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="ip != null and ip != ''">
+			and ip = #{ip},
+		</if>
+		<if test="uri != null and uri != ''">
+			and uri = #{uri}
+		</if>
+		<if test="type != null and type != ''">
+			and type = #{type}
+		</if>
+		<if test="declaringClass != null and declaringClass != ''">
+			and declaring_class = #{declaringClass}
+		</if>
+		<if test="method != null and method != ''">
+			and method = #{method}
+		</if>
+		<if test="returnType != null and returnType != ''">
+			and return_type = #{returnType}
+		</if>
+		<if test="paramData != null and paramData != ''">
+			and param_data = #{paramData}
+		</if>
+		<if test="requestTime != null and requestTime != ''">
+			and request_time = #{requestTime}
+		</if>
+		<if test="responseTime != null and responseTime != ''">
+			and response_time = #{responseTime}
+		</if>
+		<if test="exceptionType != null and exceptionType != ''">
+			and exception_type = #{exceptionType}
+		</if>
+		<if test="exceptionMsg != null and exceptionMsg != ''">
+			and exception_msg = #{exceptionMsg}
+		</if>
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.alibaba.fastjson.JSONObject">
+	    insert into logger
+	    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+	      SELECT LAST_INSERT_ID()
+	    </selectKey>
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	      <if test="ip != null">
+	        ip,
+	      </if>
+	      <if test="uri != null">
+	        uri,
+	      </if>
+	      <if test="type != null">
+	        type,
+	      </if>
+	      <if test="declaringClass != null">
+	        declaring_class,
+	      </if>
+	      <if test="method != null">
+	        method,
+	      </if>
+	      <if test="returnType != null">
+	        return_type,
+	      </if>
+	      <if test="paramData != null">
+	        param_data,
+	      </if>
+	      <if test="requestTime != null">
+	        request_time,
+	      </if>
+	      <if test="responseTime != null">
+	        response_time,
+	      </if>
+	      <if test="exceptionType != null">
+	        exception_type,
+	      </if>
+	      <if test="exceptionMsg != null">
+	        exception_msg,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	      <if test="ip != null">
+	        #{ip,jdbcType=VARCHAR},
+	      </if>
+	      <if test="uri != null">
+	        #{uri,jdbcType=VARCHAR},
+	      </if>
+	      <if test="type != null">
+	        #{type,jdbcType=VARCHAR},
+	      </if>
+	      <if test="declaringClass != null">
+	        #{declaringClass,jdbcType=VARCHAR},
+	      </if>
+	      <if test="method != null">
+	        #{method,jdbcType=VARCHAR},
+	      </if>
+	      <if test="returnType != null">
+	        #{returnType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="paramData != null">
+	        #{paramData,jdbcType=VARCHAR},
+	      </if>
+	      <if test="requestTime != null">
+	        #{requestTime,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="responseTime != null">
+	        #{responseTime,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="exceptionType != null">
+	        #{exceptionType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="exceptionMsg != null">
+	        #{exceptionMsg,jdbcType=VARCHAR},
+	      </if>
+	    </trim>
+	</insert>
+</mapper>

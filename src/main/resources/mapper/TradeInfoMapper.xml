@@ -70,11 +70,51 @@
 		</if>
 	</select>
 
-	<insert id="insert" parameterType="com.alibaba.fastjson.JSONObject">
-		insert into trade_info(trade_price, trade_type, trade_msg, task_id, status, delete_status)
-		values(
-			#{tradePrice},#{tradeType},#{tradeMsg},#{taskId},#{status},#{deleteStatus}
-		)
+		<insert id="insert" parameterType="com.alibaba.fastjson.JSONObject">
+		insert into trade_info
+	    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+	      SELECT LAST_INSERT_ID()
+	    </selectKey>
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	      <if test="tradePrice != null">
+	        trade_price,
+	      </if>
+	      <if test="tradeType != null">
+	        trade_type,
+	      </if>
+	      <if test="tradeMsg != null">
+	        trade_msg,
+	      </if>
+	      <if test="taskId != null">
+	        task_id,
+	      </if>
+	      <if test="status != null">
+	        status,
+	      </if>
+	      <if test="deleteStatus != null">
+	        delete_status,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	      <if test="tradePrice != null">
+	        #{tradePrice,jdbcType=DECIAML},
+	      </if>
+	       <if test="tradeType != null">
+	        #{tradeType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="tradeMsg != null">
+	        #{tradeMsg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="taskId != null">
+	        #{taskId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="status != null">
+	        #{status,jdbcType=VARCHAR},
+	      </if>
+	      <if test="deleteStatus != null">
+	        #{deleteStatus,jdbcType=VARCHAR},
+	      </if>
+	    </trim>
 	</insert>
 	
 	<update id="update" parameterType="com.alibaba.fastjson.JSONObject">
